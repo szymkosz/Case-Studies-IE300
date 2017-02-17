@@ -1,0 +1,14 @@
+Number of observations: 729
+Target Flight Time: 239.489 min
+
+Typical Time: 263.121 min
+
+   Time added for 
+
+               AA: 4.254 min
+               F9: 12.189 min
+               NK: 4.438 min
+               UA: 6.053 min
+               VX: 2.793 min
+
+Airline with lowest time added is VX with 2.793 min.
