@@ -1,8 +1,5 @@
-from datetime import datetime as dt
-start = dt.now()
 import csv
 import matplotlib.pyplot as plt
-afterModImp = dt.now()
 
 fileName = "FlightTime.csv"
 minFlightTime = 230
@@ -40,9 +37,6 @@ for element in flightData:
     oriDelay.append(int(element[6]))
     desDelay.append(int(element[8]))
 
-#print(oriDelay[0], desDelay[0])    # prints first delay datapoint
-#print(oriDelay[len(desDelay)-1], desDelay[len(desDelay)-1])    # print last delay datapoint
-
 ### Calculate average ori/des delays
 avgOriDelay = 0         # initialize average origin delay
 avgDesDelay = 0         # initialize average destination delay
@@ -58,24 +52,6 @@ avgOriDelay /= len(oriDelay)
 typicalTime = TFT + avgOriDelay + avgDesDelay
 typicalTime = round(typicalTime, precision)
 
-'''Time Added per Airline --- Average Delay''' # Average Delay
-airlines = []                   # list containing all airlines in data
-
-### Isolate each airline into a list
-for element in flightData:
-    if element[1] not in airlines:
-        airlines.append(element[1])
-
-### Create a dictionary that maps airline name to a list of delay data
-dictOriAirlines = {k: [] for k in airlines}     # ori delay per airline
-dictDesAirlines = {k: [] for k in airlines}     # des delay per airline
-
-    # Separate delay times per airline
-for element in flightData:
-    dictOriAirlines[element[1]].append(element[6])
-    dictDesAirlines[element[1]].append(element[8])
-
-
 ### Function takes in a list of numbers and returns the average
 def listAverage(delayData):
     total = 0
@@ -85,19 +61,13 @@ def listAverage(delayData):
     return average
 
 
-avgOriAirlineDelay = []     # Stores average origin delay per airline in a tuple
-                            # (airline, average delay)
-avgDesAirlineDelay = []
-
-
-for airline in airlines:
-    oriavg = listAverage(dictOriAirlines[airline])
-    desavg = listAverage(dictDesAirlines[airline])
-    avgOriAirlineDelay.append((airline, oriavg))
-    avgDesAirlineDelay.append((airline, desavg))
-
-
 '''Time Added per Airline''' # Average Flight Time - Target Flight Time
+airlines = []                   # list containing all airlines in data
+
+### Isolate each airline into a list
+for element in flightData:
+    if element[1] not in airlines:
+        airlines.append(element[1])
 
 # Create a dictionary that maps airline name to a list of delay data
 airlineFlightTimes = {k: [] for k in airlines}
@@ -114,8 +84,6 @@ for airline in airlines:
     avgAirlineFlightTime.append((airline, flightAvg))
     timeAdded.append((airline, round((flightAvg - typicalTime), precision)))
     timeAddedDict[airline] = (flightAvg - typicalTime)
-#print(timeAdded)
-#print(timeAddedDict)
 
 
 '''Output calculations into a text file'''
@@ -167,17 +135,3 @@ plt.ylabel("Time Added (min)")
 from matplotlib.backends.backend_pdf import PdfPages
 with PdfPages('TimeAddedGraph.pdf') as pdf:
     pdf.savefig()
-
-#print(typicalTime)
-
-#print(avgOriDelay, avgDesDelay)    # print each average delay
-
-#print(numOfObsv, TFT)          # prints number of observations and target flight time
-#print(flightData[0])           # print first line of flight data
-
-#print(avgOriAirlineDelay)      # prints the average delays for each airline
-
-end = dt.now()
-print("\nRun time with module import: " + str(end - start))
-print("Run time after module import: " + str(end - afterModImp))
-print("\nModule import added " + str((end - start)-(end - afterModImp)) + "\n\n")
