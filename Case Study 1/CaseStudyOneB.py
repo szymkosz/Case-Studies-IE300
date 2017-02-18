@@ -32,3 +32,17 @@ for element in rawFlightDelayData:
         destinations.append(element[2])
 
 ### Separate each attribute per airline
+airlineFlightDelay = {k: {} for k in airlines}
+for key in airlineFlightDelay.keys():
+    for origin in origins:
+        airlineFlightDelay[key][origin] = {}
+        airlineFlightDelay[key][origin]["Y"] = 0
+        airlineFlightDelay[key][origin]["N"] = 0
+    for dest in destinations:
+        airlineFlightDelay[key][dest] = {}
+        airlineFlightDelay[key][dest]["Y"] = 0
+        airlineFlightDelay[key][dest]["N"] = 0
+
+for i in rawFlightDelayData:
+    airlineFlightDelay[i[0]][i[1]][i[5]] += 1
+    airlineFlightDelay[i[0]][i[2]][i[5]] += 1
