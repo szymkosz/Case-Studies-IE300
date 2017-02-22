@@ -75,3 +75,22 @@ for key in airlineFlightDelay.keys():
     for i in airlineFlightDelay[key]:
         print(i, airlineFlightDelay[key][i])
 '''
+numJFKy = 0     ## Number of JFK and Delay
+numJFKn = 0     ## Number of JFK and No Delay
+numLASy = 0     ## Number of LAS and Delay
+numLASn = 0     ## Number of LAS and No Delay
+
+numAAy = 0      ## Number of AA and Delay
+numAAn = 0      ## Number of AA and No Delay
+
+for i in airlines:
+    numJFKy += airlineFlightDelay[i]["JFK"]["Y"]
+    numJFKn += airlineFlightDelay[i]["JFK"]["N"]
+    numLASy += airlineFlightDelay[i]["LAS"]["Y"]
+    numLASn += airlineFlightDelay[i]["LAS"]["N"]
+
+for i in airlineFlightDelay["AA"]:
+    numAAy += airlineFlightDelay["AA"][i]["Y"]
+    numAAn += airlineFlightDelay["AA"][i]["N"]
+
+# print(numJFKy, numJFKn, numLASy, numLASn, numAAy, numAAn)
