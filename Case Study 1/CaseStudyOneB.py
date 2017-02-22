@@ -94,3 +94,24 @@ for i in airlineFlightDelay["AA"]:
     numAAn += airlineFlightDelay["AA"][i]["N"]
 
 # print(numJFKy, numJFKn, numLASy, numLASn, numAAy, numAAn)
+
+pJFKy = (numJFKy + m * P_ORIGIN)/(numDelay + m)
+pJFKn = (numJFKn + m * P_ORIGIN)/(numNoDelay + m)
+pLASy = (numLASy + m * P_DESTINATION)/(numDelay + m)
+pLASn = (numLASn + m * P_DESTINATION)/(numDelay + m
+
+def probability(ori, dest, carr, airlinesList = airlines, flightDelayDict = airlineFlightDelay):
+    numOriY = 0
+    numOriN = 0
+    numDestY = 0
+    numDestN = 0
+    numCarrY = 0
+    numCarrN = 0
+    for i in airlines:
+        numOriY += flightDelayDict[i][ori]["Y"]
+        numOriN += flightDelayDict[i][ori]["N"]
+        numDestY += flightDelayDict[i][dest]["Y"]
+        numDestN += flightDelayDict[i][dest]["N"]
+    for i in airlineFlightDelay[carr]:
+        numAAy += airlineFlightDelay[carr][i]["Y"]
+        numAAn += airlineFlightDelay[carr][i]["N"]
