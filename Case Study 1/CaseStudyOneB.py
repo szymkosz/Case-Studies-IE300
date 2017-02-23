@@ -75,43 +75,43 @@ for key in airlineFlightDelay.keys():
     for i in airlineFlightDelay[key]:
         print(i, airlineFlightDelay[key][i])
 '''
-numJFKy = 0     ## Number of JFK and Delay
-numJFKn = 0     ## Number of JFK and No Delay
-numLASy = 0     ## Number of LAS and Delay
-numLASn = 0     ## Number of LAS and No Delay
 
-numAAy = 0      ## Number of AA and Delay
-numAAn = 0      ## Number of AA and No Delay
+## Function takes three string parameters--Origin, Destination, and Airline
+## Returns P(Delay | Ori, Dest, Carr) and P(No Delay | Ori, Dest, Carr)
+def probability(ori, dest, carr):
+    ## Initialize counter variables
+    numOriY = 0; numOriN = 0
+    numDestY = 0; numDestN = 0
+    numCarrY = 0; numCarrN = 0
 
-for i in airlines:
-    numJFKy += airlineFlightDelay[i]["JFK"]["Y"]
-    numJFKn += airlineFlightDelay[i]["JFK"]["N"]
-    numLASy += airlineFlightDelay[i]["LAS"]["Y"]
-    numLASn += airlineFlightDelay[i]["LAS"]["N"]
-
-for i in airlineFlightDelay["AA"]:
-    numAAy += airlineFlightDelay["AA"][i]["Y"]
-    numAAn += airlineFlightDelay["AA"][i]["N"]
-
-# print(numJFKy, numJFKn, numLASy, numLASn, numAAy, numAAn)
-
-pJFKy = (numJFKy + m * P_ORIGIN)/(numDelay + m)
-pJFKn = (numJFKn + m * P_ORIGIN)/(numNoDelay + m)
-pLASy = (numLASy + m * P_DESTINATION)/(numDelay + m)
-pLASn = (numLASn + m * P_DESTINATION)/(numDelay + m
-
-def probability(ori, dest, carr, airlinesList = airlines, flightDelayDict = airlineFlightDelay):
-    numOriY = 0
-    numOriN = 0
-    numDestY = 0
-    numDestN = 0
-    numCarrY = 0
-    numCarrN = 0
+    ## Calculates number of Delay/NoDelay for Origin/Destination
     for i in airlines:
-        numOriY += flightDelayDict[i][ori]["Y"]
-        numOriN += flightDelayDict[i][ori]["N"]
-        numDestY += flightDelayDict[i][dest]["Y"]
-        numDestN += flightDelayDict[i][dest]["N"]
+        numOriY += airlineFlightDelay[i][ori]["Y"]
+        numOriN += airlineFlightDelay[i][ori]["N"]
+        numDestY += airlineFlightDelay[i][dest]["Y"]
+        numDestN += airlineFlightDelay[i][dest]["N"]
+
+    ## Calculates number of Delay/NoDelay for Airline
     for i in airlineFlightDelay[carr]:
-        numAAy += airlineFlightDelay[carr][i]["Y"]
-        numAAn += airlineFlightDelay[carr][i]["N"]
+        numCarrY += airlineFlightDelay[carr][i]["Y"]
+        numCarrN += airlineFlightDelay[carr][i]["N"]
+
+    ## Calculates probability of Delay/NoDelay for Origin/Dest/Airline
+    pOriY = (numOriY + m * P_ORIGIN)/(numDelay + m)
+    pOriN = (numOriN + m * P_ORIGIN)/(numNoDelay + m)
+    pDestY = (numDestY + m * P_DESTINATION)/(numDelay + m)
+    pDestN = (numDestN + m * P_DESTINATION)/(numDelay + m)
+    pCarrY = (numCarrY + m * P_CARRIER)/(numDelay + m)
+    pCarrN = (numCarrN + m * P_CARRIER)/(numNoDelay + m)
+
+    ## Calculates P(Delay | Ori, Dest, Carr) and P(No Delay | Ori, Dest, Carr)
+    pTotalY = (probY * pOriY * pDestY * pCarrY)
+    pTotalN = (probN * pOriN * pDestN * pCarrN)
+
+    delayed = (pTotalY > pTotalN)
+    return pTotalY, pTotalN, delayed
+
+
+print(probability("JFK","LAS","AA"))
+print(airlines, origins, destinations)
+print(P_ORIGIN, P_DESTINATION, P_CARRIER)
