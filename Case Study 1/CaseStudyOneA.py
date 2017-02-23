@@ -87,7 +87,9 @@ for airline in airlines:
 
 
 '''Output calculations into a text file'''
-text_file = open("Output.txt", 'w')
+text_file = open("PartA_Output.txt", 'w')
+text_file.write("IE 300 -- CASE STUDY 1, PART A -- Feb. 23, 2017\n\n\n")
+
 
 # ---> text_file.write()
 ### Number of observations
@@ -102,7 +104,7 @@ text_file.write("Typical Time: " + str(typicalTime) + " min" + '\n\n')
 ### Time added for each airline
 text_file.write("   Time added for \n\n")
 for element in timeAdded:
-    text_file.write("               " + str(element[0]) + ": " + str(element[1]) + " min" + '\n')
+    text_file.write("               " + str(element[0]) + ": " + str('{:>8}'.format(element[1])) + " min" + '\n')
 
 ##### Lowest time added?
 lowestTime = float(timeAdded[0][1])
