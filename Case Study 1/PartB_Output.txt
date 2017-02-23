@@ -1,0 +1,31 @@
+IE 300 -- CASE STUDY 1, PART B -- Feb. 23, 2017
+
+
+Number 1 -- JFK to LAS on American Airlines
+
+  P(Delay | JFK, LAS, AA):      0.0028647
+  P(No Delay | JFK, LAS, AA):   0.0133288
+  This flight is not delayed.
+
+
+Number 2 -- JFK to LAS on JetBlue
+
+  P(Delay | JFK, LAS, B6):      0.0033916
+  P(No Delay | JFK, LAS, B6):   0.0093411
+  This flight is not delayed.
+
+
+Number 3 -- SFO to ORD on Virgin Airlines
+
+  P(Delay | SFO, ORD, VX):       0.008337
+  P(No Delay | SFO, ORD, VX):   0.0261966
+  This flight is not delayed.
+
+
+Number 4 -- SFO to ORD on Southwest Airlines
+
+  P(Delay | SFO, ORD, WN):      0.0041895
+  P(No Delay | SFO, ORD, WN):   0.0154267
+  This flight is not delayed.
+
+
